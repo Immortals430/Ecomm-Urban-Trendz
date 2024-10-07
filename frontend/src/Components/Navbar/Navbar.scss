@@ -164,7 +164,9 @@
     }
     .bar-mid {
       display: flex;
+      width: 100%;
     }
+
   }
 
   .navbar {
@@ -207,4 +209,5 @@
   .navbar {
     padding: 20px 5px;
   }
+
 }
