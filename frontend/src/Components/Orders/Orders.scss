@@ -1,0 +1,26 @@
+.orders-sec {
+  .orders {
+    display: flex;
+    justify-content: center;
+    margin: 40px 20px;
+
+    th,
+    td {
+      padding: 10px 20px;
+    }
+    th {
+      padding-bottom: 20px;
+      font-size: large;
+      font-weight: 700;
+    }
+    table {
+      text-align: center;
+      font-weight: 500;
+      font-size: medium;
+    }
+
+    .text-left {
+      text-align: left;
+    }
+  }
+}

@@ -1,0 +1,42 @@
+.mobilefilter-sec {
+  position: fixed;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  background-color: #00000057;
+  z-index: 4;
+  visibility: hidden;
+  transition: opacity 0.4s ease-in-out, visibility 0s 0.4s;
+  opacity: 0;
+
+  .filter-sec {
+    padding: 20px 20px;
+    background-color: white;
+    width: 270px;
+    position: absolute;
+    top: 0;
+    left: -300px;
+    transition: left 0.4s ease-in-out;
+
+    &.open {
+      left: 0;
+    }
+  }
+}
+
+.mobilefilter-sec.open {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.4s ease-in-out;
+}
+
+.checkoutpage {
+  margin: 100px auto;
+  text-align: center;
+  min-width: 300px;
+  max-width: 500px;
+  > * {
+    margin-bottom: 30px;
+  }
+}

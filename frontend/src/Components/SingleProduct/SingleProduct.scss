@@ -1,0 +1,147 @@
+.singleproduct-container {
+  max-width: 1152px;
+  min-width: 800px;
+  margin: auto;
+  > div {
+    padding: 30px;
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  img,
+  .img-container {
+    vertical-align: top;
+    position: sticky;
+    top: 60px;
+  }
+  .img-container {
+    width: 40%;
+  }
+  .product-detail {
+    width: 50%;
+
+    .product-name {
+      justify-content: space-between;
+    }
+    > * {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+  }
+}
+
+.singleproduct-container {
+  .price {
+    font-weight: 800;
+    font-size: larger;
+  }
+
+  .desc {
+    font-size: small;
+    font-weight: 500;
+  }
+
+  .color {
+    font-weight: 700;
+    font-size: small;
+  }
+  .color-list {
+    gap: 20px;
+    > div {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+    }
+    > .red {
+      background-color: red;
+    }
+    > .green {
+      background-color: red;
+    }
+    > .blue {
+      background-color: blue;
+    }
+    > .violet {
+      background-color: violet;
+    }
+    > .pink {
+      background-color: pink;
+    }
+  }
+
+  .size {
+    font-weight: 700;
+    font-size: small;
+  }
+
+  .size-list {
+    gap: 20px;
+    flex-wrap: wrap;
+    font-weight: 700;
+
+    > div {
+      border: 2px solid #e7e8ec;
+      width: 70px;
+      height: 40px;
+      text-align: center;
+      align-content: center;
+    }
+  }
+
+  .quantity {
+    font-size: small;
+    font-weight: 700;
+    align-items: center;
+  }
+  .quantity-btn {
+    gap: 20px;
+    > div {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    > div > div {
+      padding: 10px;
+    }
+    button {
+      padding: 20px;
+      border: none;
+      background-color: #e7e8ec;
+      color: rgb(0, 0, 0);
+      font-size: small;
+      font-weight: 700;
+      flex: 1;
+    }
+  }
+
+  .buy-btn {
+    text-align: center;
+    width: 100%;
+    padding: 20px;
+    border: none;
+    background-color: black;
+    color: white;
+    font-size: small;
+    font-weight: 700;
+  }
+  .extra {
+    font-size: x-small;
+    font-weight: 500;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 800px) {
+  .singleproduct-container {
+    display: flex;
+    flex-flow: column;
+    max-width: none;
+    min-width: fit-content;
+    > .img-container,
+    .product-detail {
+      width: auto;
+      position: static;
+    }
+  }
+}

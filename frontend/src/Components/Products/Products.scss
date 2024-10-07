@@ -1,0 +1,127 @@
+
+
+
+.product-sec {
+  scroll-margin-top: 65px;
+  background-color: black;
+  color: white;
+
+  h1 {
+    margin-bottom: 30px;
+    font-size: x-large; 
+  }
+  .product-category {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 60px;
+    > div {
+      font-weight: 700;
+      color: rgb(176, 176, 176);
+      font-size: small;
+      border-bottom-style: solid;
+      border-bottom-width: 1px;
+      border-bottom-color: rgb(176, 176, 176);
+      padding: 20px 40px;
+      text-align: center;
+    }
+  }
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  justify-content: center;
+  gap: 40px;
+  padding: 0 180px;
+  font-weight: bold;
+  font-size: small;
+
+  > * > div {
+    display: flex;
+    flex-flow: column;
+    position: relative;
+    overflow: hidden;
+
+    > * {
+      margin: 0 0 10px 0;
+      border-radius: 3px;
+    }
+
+    .price {
+      color: rgb(221, 86, 33);
+      margin-top: auto
+    }
+
+    p {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;
+      line-clamp: 3;
+      overflow: hidden;
+    }
+
+    .image-container {
+      background-color: black;
+      img{
+        transition: opacity 0.3s ease-in-out;
+        display: block;
+      }
+    }
+
+    span {
+      position: absolute;
+      right: -10%;
+      opacity: 0;
+      transition: all 0.3s ease-in-out;
+      display: block;
+      background-color: white;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      @include center;
+      color: black;
+    }
+
+    span:hover {
+      background-color: black;
+      color: white;
+    }
+
+    .wishlist {
+      top: 4%;
+    }
+
+    .cart {
+      top: calc(4% + 70px);
+    }
+
+
+  }
+  .product-container:hover span {
+    opacity: 1;
+    right: 4%;
+  }
+
+  .product-container:hover img {
+    opacity: 0.4;
+  }
+}
+
+.product-container{
+  height: 100%;
+}
+
+
+@media (max-width: 1450px) {
+  .product-grid{
+    padding: 0 20px;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 900px) {
+  .product-sec{
+    scroll-margin-top: -2px;
+  }
+}
+

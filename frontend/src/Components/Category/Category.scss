@@ -1,0 +1,49 @@
+.category-sec{
+    scroll-margin-top: 65px;
+    padding: 80px 0;
+    h1{
+        margin-bottom: 100px;
+        font-size: xx-large;
+    }
+}
+
+
+.category{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 50px;
+    >.wrapper{
+        text-align: center;
+        font-weight: bold;
+        font-size: small;
+        transition: color 0.2s ease-in-out;
+        outline: black;
+        >div{
+            @include background;
+            padding: 20px;
+            max-width: 200px;
+            min-width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            margin-bottom: 20px;
+            
+        }
+
+    }
+
+}
+
+
+.wrapper:hover{
+    color: red;
+}
+
+
+@media (max-width: 900px){
+    .category-sec{
+        scroll-margin-top: -2px;
+    }
+
+}

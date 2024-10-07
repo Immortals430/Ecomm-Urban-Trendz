@@ -1,0 +1,56 @@
+.account-sec {
+.head{
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    div{
+        display: flex;
+        align-items: center;
+        min-width: 35px;
+        color:#b23c3c;
+        font-weight: 600;
+    }
+    h1{
+        flex: 1;
+    }
+}
+}
+
+.account-form {
+    padding: 60px 40px;
+    margin: auto;
+  > div {
+    display: flex;
+    flex-flow: row;
+    margin-bottom: 30px;
+    align-items: center;
+  }
+  input{
+    flex: 1;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid rgb(186, 186, 186);
+    font-weight: 500;
+    padding: 5px 0;
+  }
+  label{
+    min-width: 170px;
+    font-weight: 600;
+  }
+
+  button{
+    padding: 20px;
+    border: 2px solid black ;
+    background-color: black;
+    color: white;
+    font-weight: 500;
+    margin-top: 20px;
+    transition: all 0.2s ease-in-out;
+    width: 154px;
+    font-weight: 600; 
+    &:hover{
+        background-color: white;
+        color: black;
+    }
+  }
+}

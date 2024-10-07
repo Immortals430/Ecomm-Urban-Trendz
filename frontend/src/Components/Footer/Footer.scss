@@ -1,0 +1,52 @@
+.footer-sec {
+  padding: 60px 0;
+  background-color: black;
+  color: white;
+  font-size: small;
+}
+
+.footer-container {
+  display: flex;
+  gap: 30px;
+  padding: 0 50px;
+  flex-wrap: wrap;
+
+  > div {
+    h2 {
+      font-size: small;
+      font-weight: 900;
+      letter-spacing: 1px;
+      margin-bottom: 60px;
+
+    }
+    > * {
+      margin-bottom: 20px;
+    }
+  }
+
+
+  .contact{
+    flex: 2;
+    min-width: 224px;
+  }
+
+  .support, .info{
+    min-width: 137px;
+  }
+
+  .newsletter{
+    flex: 1;
+    min-width: 112px;
+  }
+}
+
+.newsletter button{
+    width: 100%;
+    border: none;
+    color: white;
+    background: #dd5521;
+    padding: 10px;
+    border-radius: 2px;
+    font-size: smaller;
+    outline: none;
+}

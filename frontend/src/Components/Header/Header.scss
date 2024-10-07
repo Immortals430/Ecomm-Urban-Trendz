@@ -1,0 +1,276 @@
+@keyframes zoom {
+  0% {
+    transform: scale(1);
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  30% {
+    opacity: 1;
+  }
+  32% {
+    transform: scale(1.15);
+  }
+  35% {
+    transform: scale(1.15);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.15);
+    opacity: 0;
+  }
+}
+
+.home-header {
+  color: white;
+}
+
+/* header */
+.header {
+  position: relative;
+
+  .header-nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: transparent;
+  }
+
+  .img {
+    max-width: 150%;
+    min-width: 100%;
+    min-height: 300px;
+    max-height: 100dvh;
+    object-fit: cover;
+    animation: zoom 18s linear infinite;
+    opacity: 0;
+  }
+
+  .img-wrapper {
+    overflow: hidden;
+    width: 100%;
+    display: flex;
+    position: absolute;
+    top: 0;
+    overflow: hidden;
+  }
+
+  .img1 {
+    animation-delay: 0s;
+  }
+
+  .img2 {
+    animation-delay: 6s;
+  }
+
+  .img3 {
+    animation-delay: 12s;
+  }
+
+  .wrapper {
+    min-height: 300px;
+    max-width: 150%;
+    min-width: 100%;
+    min-height: 300px;
+    max-height: 100vh;
+    object-fit: cover;
+  }
+
+  .wrapper-container {
+    position: relative;
+  }
+}
+
+/*header nav */
+
+/* header text animations */
+
+$text1: (
+  (0%, 0, -120px, 0),
+  (5%, 1, 0, 0),
+  (28%, 1, 0, 0),
+  (33%, 0, 0, 0),
+  (100%, 0, 0, 0)
+);
+
+$text2: (
+  (0%, 0, 80px, 0),
+  (5%, 1, 0, 0),
+  (28%, 1, 0, 0),
+  (33%, 0, 0, 0),
+  (100%, 0, 0, 0)
+);
+
+$text3: (
+  (0%, 0, -120px, 0),
+  (5%, 1, 0, 0),
+  (28%, 1, 0, 0),
+  (33%, 0, 0, 0),
+  (100%, 0, 0, 0)
+);
+
+$text4: (
+  (0%, 0, 0, -30px),
+  (5%, 1, 0, 0),
+  (28%, 1, 0, 0),
+  (33%, 0, 0, 0),
+  (100%, 0, 0, 0)
+);
+$text5: (
+  (0%, 0, 0, 0),
+  (5%, 1, 0, 0),
+  (28%, 1, 0, 0),
+  (33%, 0, 0, 0),
+  (34%, 0, 0, 0),
+  (100%, 0, 0, 0)
+);
+
+$datas: (
+  (text1, $text1),
+  (text2, $text2),
+  (text3, $text3),
+  (text4, $text4),
+  (text5, $text5)
+);
+
+@each $data in $datas {
+  @keyframes #{nth($data, 1)} {
+    $values: nth($data, 2);
+    @each $value in $values {
+      $frame: nth($value, 1);
+      $opacity: nth($value, 2);
+      $left: nth($value, 3);
+      $bottom: nth($value, 4);
+
+      #{$frame} {
+        opacity: $opacity;
+        left: $left;
+        bottom: $bottom;
+      }
+    }
+  }
+}
+
+.header-text {
+  position: absolute;
+  z-index: 3;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 10%;
+  > * {
+    position: relative;
+  }
+
+  .text1 {
+    font-size: 16px;
+    font-weight: 800;
+    margin-bottom: 30px;
+    left: 120px;
+    animation: text1 18s ease-in-out infinite;
+    opacity: 0;
+  }
+  .text2 {
+    margin-bottom: 15px;
+    font-size: 25px;
+    left: 80px;
+    animation: text2 18s ease-in-out infinite;
+    opacity: 0;
+  }
+  .text3 {
+    font-size: 60px;
+    font-weight: 900;
+    margin-bottom: 25px;
+    animation: text3 18s ease-in-out infinite;
+    left: 120px;
+    opacity: 0;
+  }
+  .text4 {
+    margin-bottom: 30px;
+    font-size: 14px;
+    animation: text4 18s ease-in-out infinite;
+    opacity: 0;
+    bottom: -30px;
+  }
+  .text5 {
+    display: inline-block;
+    height: 50px;
+    background-color: white;
+    color: black;
+    font-size: 11px;
+    font-weight: bold;
+    text-align: center;
+    align-content: center;
+    padding: 15px 20px;
+    opacity: 0;
+    animation: text5 18s ease-in-out infinite;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+
+  .delay1 {
+    animation-delay: 0s;
+  }
+
+  .delay2 {
+    animation-delay: 6s;
+  }
+
+  .delay3 {
+    animation-delay: 12s;
+  }
+}
+
+@media (max-width: 1200px) {
+  .header-nav {
+    .header-nav-left {
+      span {
+        display: none;
+      }
+
+      .hamburger-react {
+        display: flex;
+      }
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .header-nav {
+    display: none;
+  }
+
+  .header-bar {
+    font-size: x-small;
+  }
+}
+
+@media (max-width: 700px) {
+  .header-text {
+    .text1 {
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+    .text2 {
+      margin-bottom: 14px;
+      font-size: 25px;
+    }
+    .text3 {
+      font-size: 30px;
+      margin-bottom: 10px;
+    }
+    .text4 {
+      font-size: 10px;
+      margin-bottom: 15px;
+    }
+    .text5 {
+      height: 35px;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 10px 20px;
+    }
+  }
+
+  .header-bar {
+    font-size: xx-small;
+  }
+}

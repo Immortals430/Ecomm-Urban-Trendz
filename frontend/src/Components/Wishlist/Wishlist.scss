@@ -1,0 +1,33 @@
+.wishlist-sec {
+  .product-grid {
+    margin-top: 60px;
+  }
+
+  > div .cart {
+    width: 90%;
+    border-radius: 3px;
+    right: 50%;
+    transform: translateX(50%);
+
+    bottom: 80px;
+    top: auto;
+  }
+  > div .wishlist {
+    width: 90%;
+    border-radius: 3px;
+    right: 50%;
+    transform: translateX(50%);
+    bottom: 10px;
+    top: auto;
+  }
+
+  .image-container {
+    position: relative;
+  }
+
+  .product-container:hover span {
+    opacity: 1;
+    right: 50%;
+    transform: translateX(50%);
+  }
+}
