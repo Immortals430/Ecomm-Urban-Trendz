@@ -51,7 +51,6 @@ export const googleLogin = createAsyncThunk(
   async (args, { dispatch }) => {
     try {
       const { data } = await googleLoginAPI(args);
-      console.log(data)
       document.cookie = data.token;
       dispatch(SET_LOGGED_USER(data.user));
     } catch (err) {
@@ -80,7 +79,6 @@ export const logout = createAsyncThunk("auth/logout", () => {
   // Cookies.remove("Urban Trendz")
   document.cookie =
     "Urban Trendz=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-  console.log("Cookie removed manually");
 });
 
 export const authReducer = authSlice.reducer;

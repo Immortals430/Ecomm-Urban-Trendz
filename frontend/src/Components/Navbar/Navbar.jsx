@@ -15,6 +15,14 @@ export default function Navbar() {
     useContext(AppContext);
   const { loggedUser } = useSelector(authSelector);
 
+  const navigateFunc = (path) => {
+    if (loggedUser._id) {
+      navigate(path);
+    } else {
+      setAuthPage((prev) => !prev);
+    }
+  };
+
   return (
     <nav className="navbar-sec">
       <div className={`navbar ${navbar && "open"}`}>
@@ -40,22 +48,30 @@ export default function Navbar() {
           </a>
         </div>
         <div className="bar-right">
-          <Link to={"/wishlist"}>
-            <IoHeartOutline size={22} className="wishlist" />
-          </Link>
-          <Link to={"/orders"}>
-            <VscPackage size={22} className="orders" />
-          </Link>
-          <Link>
-            <BsCart4 size={22} onClick={() => setQuickCart(true)} />
-          </Link>
+          <IoHeartOutline
+            size={22}
+            className="wishlist"
+            onClick={() => navigateFunc("/wishlist")}
+          />
+
+          <VscPackage
+            size={22}
+            className="orders"
+            onClick={() => navigateFunc("/orders")}
+          />
+
+          <BsCart4 size={22} onClick={() => setQuickCart(true)} />
 
           {loggedUser._id ? (
-            <Link to={"/user-account"} className="account">
+            <Link className="account" onClick={() => navigateFunc("/orders")}>
               <RiUserFollowFill size={22} />
             </Link>
           ) : (
-            <GoPerson size={22} onClick={() => setAuthPage((prev) => !prev)} className="account" />
+            <GoPerson
+              size={22}
+              onClick={() => setAuthPage((prev) => !prev)}
+              className="account"
+            />
           )}
         </div>
       </div>

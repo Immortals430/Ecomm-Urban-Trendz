@@ -22,12 +22,13 @@ export function GoogleLoginButton() {
   });
 
   return loading ? (
-      <div className="google-login-btn loading">
+      <div className="login-loading-btn">
         <MoonLoader size={20} color="white" />
       </div>
   ) : (
-    <button onClick={login} className="google-login-btn" type="button">
+    <button onClick={login} className="login-loading-btn" type="button">
       <FaGoogle size={20} /> Login with Google
     </button>
   );
+  
 }

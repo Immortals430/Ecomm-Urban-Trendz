@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { MdEmail } from "react-icons/md";
 import { IoClose } from "react-icons/io5";
 import { AppContext } from "../../AppContext";
@@ -6,14 +6,17 @@ import { useDispatch } from "react-redux";
 import { signin, signup } from "../../redux/reducers/auth_reducer";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { GoogleLoginButton } from "./GoogleLoginButton";
+import MoonLoader from "react-spinners/MoonLoader";
 
 export default function Auth() {
   const { loginForm, setLoginForm, setAuthPage } = useContext(AppContext);
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
 
   // sign up
   const callSignup = async (e) => {
     e.preventDefault();
+    setLoading(true)
     const formData = {
       username: e.target.username.value,
       email: e.target.email.value,
@@ -21,6 +24,7 @@ export default function Auth() {
       confirmPassword: e.target.confirmPassword.value,
     };
     const { payload } = await dispatch(signup(formData));
+    setLoading(false)
     if (!payload) return;
     e.target.reset();
     setLoginForm(true);
@@ -29,12 +33,14 @@ export default function Auth() {
   // sign in
   async function callSignin(e) {
     e.preventDefault();
+    setLoading(true);
     const email = e.target.email.value;
     const password = e.target.password.value;
     await dispatch(signin({ email, password }));
+    setLoading(false);
     setAuthPage(false);
+    s;
   }
-
 
   return (
     <section className="auth-sec">
@@ -75,8 +81,13 @@ export default function Auth() {
           <p>
             <MdEmail /> Forgot your <b>Password?</b>
           </p>
-
-          <button type="submit">LOGIN</button>
+          {loading ? (
+            <div className="login-loading-btn loading">
+              <MoonLoader size={20} color="white" />
+            </div>
+          ) : (
+            <button type="submit">LOGIN</button>
+          )}
 
           <GoogleOAuthProvider
             clientId={import.meta.env.VITE_APP_GOOGLE_CLIENTID}
@@ -118,7 +129,14 @@ export default function Auth() {
             id="confirmPassword"
           />
 
-          <button type="submit">REGISTER</button>
+          {loading ? (
+            <div className="login-loading-btn">
+              <MoonLoader size={20} color="white" />
+            </div>
+          ) : (
+            <button type="submit">REGISTER</button>
+          )}
+
         </form>
 
         <div className="close">

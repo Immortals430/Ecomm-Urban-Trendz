@@ -1,11 +1,10 @@
 import AuthRepository from "./auth_repository.js";
 import { hashPassword } from "../../utils/bcrypt.js";
-import { sendAccountCreationLink } from "../../utils/mail_handler.js";
 import { ApplicationError } from "../../middlewares/error_handler.js";
 import jwt from "jsonwebtoken";
 const jwtSecret = process.env.JWT_SECRET;
 const projectName = process.env.PROJECT_NAME;
-
+import axios from "axios";
 
 export default class AuthController {
   constructor() {
@@ -32,7 +31,21 @@ export default class AuthController {
         ...req.body,
         password,
       });
-      sendAccountCreationLink(email, userid);
+
+      await axios.post(
+        `http://${process.env.MAIL_URL}/send-account-creation-link`,
+        {
+          email,
+          userid,
+          domain: process.env.SERVERURL,
+        },
+        {
+          headers: {
+            "mail-secret": process.env.MAIL_SECRET,
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       return res.status(201).json({
         success: true,
@@ -68,7 +81,7 @@ export default class AuthController {
       res
         .status(200)
         .cookie(projectName, token, {
-          sameSite: 'None',
+          sameSite: "None",
           secure: true,
           expires: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000), // 2 days from current date
         })
@@ -98,7 +111,7 @@ export default class AuthController {
       res
         .status(200)
         .cookie(projectName, token, {
-          sameSite: 'None',
+          sameSite: "None",
           secure: true,
           expires: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000), // 2 days from current date
         })
@@ -115,12 +128,11 @@ export default class AuthController {
 
   // update user
   async updateUser(req, res, next) {
-    
     // const files = req.file
     try {
       let user = await this.authRepository.updateUser(
         req.body,
-        req.user.id,
+        req.user.id
         // files
       );
 
