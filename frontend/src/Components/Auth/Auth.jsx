@@ -39,7 +39,7 @@ export default function Auth() {
     await dispatch(signin({ email, password }));
     setLoading(false);
     setAuthPage(false);
-    s;
+
   }
 
   return (
