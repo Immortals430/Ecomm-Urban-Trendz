@@ -51,6 +51,7 @@ export const googleLogin = createAsyncThunk(
   async (args, { dispatch }) => {
     try {
       const { data } = await googleLoginAPI(args);
+      console.log("data", data)
       document.cookie = data.token;
       dispatch(SET_LOGGED_USER(data.user));
     } catch (err) {

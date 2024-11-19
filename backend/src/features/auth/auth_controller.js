@@ -101,6 +101,7 @@ export default class AuthController {
     const email = req.user.emailAddresses[0].value;
     const username = req.user.names[0].displayName;
     try {
+      console.log("google login")
       let { user, token } = await this.authRepository.googleLogin(
         email,
         username

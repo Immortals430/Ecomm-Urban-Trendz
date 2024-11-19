@@ -14,7 +14,7 @@ export default function Navbar() {
   const { setQuickCart, setAuthPage, setSidebar, sidebar, navbar } =
     useContext(AppContext);
   const { loggedUser } = useSelector(authSelector);
-
+  console.log(loggedUser)
   const navigateFunc = (path) => {
     if (loggedUser._id) {
       navigate(path);
