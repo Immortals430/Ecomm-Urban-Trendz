@@ -11,13 +11,11 @@ import { Squash as Hamburger } from "hamburger-react";
 import { VscPackage } from "react-icons/vsc";
 import { useNavigate } from "react-router-dom";
 
-
 export default function HeaderNavbar1() {
   const { setAuthPage, setQuickCart, setSidebar, sidebar } =
     useContext(AppContext);
   const { loggedUser } = useSelector(authSelector);
-  const navigate = useNavigate()
-
+  const navigate = useNavigate();
 
   // navigate func
   const navigateFunc = (path) => {
@@ -27,8 +25,6 @@ export default function HeaderNavbar1() {
       setAuthPage((prev) => !prev);
     }
   };
-
-
 
   return (
     <nav className="header-nav">
@@ -81,7 +77,6 @@ export default function HeaderNavbar1() {
             <GoPerson size={22} />
           </div>
         )}
-        
       </div>
     </nav>
   );

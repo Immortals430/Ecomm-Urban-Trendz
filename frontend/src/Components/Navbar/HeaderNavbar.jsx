@@ -14,7 +14,6 @@ export default function HeaderNavbar() {
   const { loggedUser } = useSelector(authSelector);
   const navigate = useNavigate();
 
-
   // navigate func
   const navigateFunc = (path) => {
     if (loggedUser._id) {
@@ -23,7 +22,6 @@ export default function HeaderNavbar() {
       setAuthPage((prev) => !prev);
     }
   };
-
 
   return (
     <nav className="header-nav">
@@ -43,7 +41,10 @@ export default function HeaderNavbar() {
         </div>
         <div>
           {loggedUser._id ? (
-            <RiUserFollowFill size={22} onClick={() => navigateFunc("/user-account")} />
+            <RiUserFollowFill
+              size={22}
+              onClick={() => navigateFunc("/user-account")}
+            />
           ) : (
             <GoPerson size={22} onClick={() => setAuthPage(true)} />
           )}
