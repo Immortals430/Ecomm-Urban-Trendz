@@ -7,18 +7,18 @@ const API = axios.create({
   withCredentials: true,
 });
 
-export const signupAPI = (authData) => API.post("/auth/signup", authData);
+export const signupAPI = (authData) => API.post("/user/signup", authData);
 
-export const signinAPI = (authData) => API.post("/auth/signin", authData);
+export const signinAPI = (authData) => API.post("/user/signin", authData);
 
 export const getLoggedUserAPI = (data) =>
-  API.get(`/auth/get-login-status/${data}`);
+  API.get(`/user/get-login-status/${data}`);
 
 export const googleLoginAPI = (token) =>
-  API.post(`/auth/google-login/`, null, {headers: {Authorization: token}});
+  API.post(`/user/google-login/`, null, {headers: {Authorization: token}});
 
 export const updateUserAPI = (useDetails) =>
-  API.put("/auth/update-user", useDetails);
+  API.put("/user/update-user", useDetails);
 
 export const getProductAPI = (args) => API.post("/product/getProduct", args);
 
@@ -26,6 +26,7 @@ export const addToCartAPI = (productId, quantity = 1) =>
   API.post(`/cart/add/?productId=${productId}&quantity=${quantity}`);
 
 export const getCartItemAPI = () => API.get(`/cart/getCartItems`);
+
 
 export const removeFromCartAPI = (productId, quantity = 1) =>
   API.post(`/cart/remove/?productId=${productId}&quantity=${quantity}`);

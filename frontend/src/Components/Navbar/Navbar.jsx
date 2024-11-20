@@ -4,7 +4,7 @@ import { BsCart4 } from "react-icons/bs";
 import { useContext } from "react";
 import { AppContext } from "../../AppContext";
 import { Squash as Hamburger } from "hamburger-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { VscPackage } from "react-icons/vsc";
 import { useSelector } from "react-redux";
 import { authSelector } from "../../redux/reducers/auth_reducer";
@@ -14,6 +14,15 @@ export default function Navbar() {
   const { setQuickCart, setAuthPage, setSidebar, sidebar, navbar } =
     useContext(AppContext);
   const { loggedUser } = useSelector(authSelector);
+  const navigate = useNavigate() 
+
+  const navigateFunc = (path) => {
+    if (loggedUser._id) {
+      navigate(path);
+    } else {
+      setAuthPage((prev) => !prev);
+    }
+  };
 
   return (
     <nav className="navbar-sec">
@@ -40,22 +49,30 @@ export default function Navbar() {
           </a>
         </div>
         <div className="bar-right">
-          <Link to={"/wishlist"}>
-            <IoHeartOutline size={22} className="wishlist" />
-          </Link>
-          <Link to={"/orders"}>
-            <VscPackage size={22} className="orders" />
-          </Link>
-          <Link>
-            <BsCart4 size={22} onClick={() => setQuickCart(true)} />
-          </Link>
+          <IoHeartOutline
+            size={22}
+            className="wishlist"
+            onClick={() => navigateFunc("/wishlist")}
+          />
+
+          <VscPackage
+            size={22}
+            className="orders"
+            onClick={() => navigateFunc("/orders")}
+          />
+
+          <BsCart4 size={22} onClick={() => setQuickCart(true)} />
 
           {loggedUser._id ? (
-            <Link to={"/user-account"} className="account">
+            <Link className="account" onClick={() => navigateFunc("/orders")}>
               <RiUserFollowFill size={22} />
             </Link>
           ) : (
-            <GoPerson size={22} onClick={() => setAuthPage((prev) => !prev)} className="account" />
+            <GoPerson
+              size={22}
+              onClick={() => setAuthPage((prev) => !prev)}
+              className="account"
+            />
           )}
         </div>
       </div>

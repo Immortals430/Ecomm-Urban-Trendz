@@ -14,6 +14,8 @@ import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { addToCart, toggleWishlist } from "../../redux/reducers/user_reducer";
 import { authSelector } from "../../redux/reducers/auth_reducer";
+import BlogItem from "../Loading/LoadingCards";
+import emptyBox from "../../assets/nothing_found.png";
 
 export default function SearchResult() {
   const { searchResult } = useSelector(productSelector);
@@ -22,10 +24,16 @@ export default function SearchResult() {
     useContext(AppContext);
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(true);
 
   // get product
   useEffect(() => {
-    callGetProduct();
+    const initialize = async () => {
+      setLoading(true);
+      await callGetProduct();
+      setLoading(false);
+    };
+    initialize();
   }, [searchFilter, page]);
 
   async function callGetProduct() {
@@ -65,6 +73,7 @@ export default function SearchResult() {
     <section className="searchresult-container">
       <div>
         <Filter />
+
         <div className="product-grid-container">
           <div className="product-grid-head">
             <BsFilterRight
@@ -98,53 +107,71 @@ export default function SearchResult() {
               ))}
           </div>
 
-          <div className="product-grid">
-            {searchResult.map((product) => (
-              <Link to={`/product/${product._id}`} key={product._id}>
-                <div className="product-container">
-                  <div className="image-container">
-                    <img src={product.searchImage} alt="" />
-                  </div>
-                  <p>{product.product}</p>
-                  <p>{product.rating}</p>
-                  <div>
-                  {Array(Math.floor(product?.rating || 0))
-                .fill()
-                .map(() => (
-                  <TiStar />
-                ))}
-                  </div>
-                  <p className="price">{product.price}</p>
+          {loading ? (
+            <div className="product-grid">
+            {[...Array(12)].map((_, index) => <BlogItem key={index} />)}
+            </div>
+          ) : !loading && searchResult.length > 0 ? (
+            <div className="product-grid">
+              {searchResult.map((product) => (
+                <Link to={`/product/${product._id}`} key={product._id}>
+                  <div className="product-container">
+                    <div className="image-container">
+                      <img src={product.searchImage} alt="" />
+                    </div>
+                    <p>{product.product}</p>
+                    <p>{product.rating}</p>
+                    <div>
+                      {Array(Math.floor(product?.rating || 0))
+                        .fill()
+                        .map((_, index) => (
+                          <TiStar key={index} />
+                        ))}
+                    </div>
+                    <p className="price">{product.price}</p>
 
-                  <span
-                    className="wishlist"
-                    onClick={(e) => callToggleWishlist(e, product._id)}
-                  >
-                    <IoHeartOutline size={22} />
-                  </span>
+                    <span
+                      className="wishlist"
+                      onClick={(e) => callToggleWishlist(e, product._id)}
+                    >
+                      <IoHeartOutline size={22} />
+                    </span>
 
-                  <span
-                    className="cart"
-                    onClick={(e) => callAddToCart(e, product._id)}
-                  >
-                    <BsCart4 size={22} />
-                  </span>
-                </div>
-              </Link>
-            ))}
-          </div>
+                    <span
+                      className="cart"
+                      onClick={(e) => callAddToCart(e, product._id)}
+                    >
+                      <BsCart4 size={22} />
+                    </span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          ) : ( 
+            <img src={emptyBox} className="emptyBox" />
+          )}
         </div>
       </div>
 
       <div className="navigate">
         {page != 1 ? (
-          <div onClick={() => setPage((prev) => prev - 1)} className="navigate-btn">Prev</div>
+          <div
+            onClick={() => setPage((prev) => prev - 1)}
+            className="navigate-btn"
+          >
+            Prev
+          </div>
         ) : null}
 
         <div>{page}</div>
 
         {searchResult.length < 12 ? null : (
-          <div onClick={() => setPage((prev) => prev + 1)} className="navigate-btn">Next</div>
+          <div
+            onClick={() => setPage((prev) => prev + 1)}
+            className="navigate-btn"
+          >
+            Next
+          </div>
         )}
       </div>
     </section>

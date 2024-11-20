@@ -9,13 +9,12 @@ import {
 } from "../../redux/reducers/user_reducer";
 import { Link } from "react-router-dom";
 import { authSelector } from "../../redux/reducers/auth_reducer";
+import emptyBox from "../../assets/nothing_found.png";
 
 export default function Wishlist() {
   const { wishlist } = useSelector(userSelector);
   const dispatch = useDispatch();
   const { loggedUser } = useSelector(authSelector);
-
-
 
   // add to cart
   async function callAddToCart(e, productId) {
@@ -43,40 +42,44 @@ export default function Wishlist() {
         <h1>Wishlist</h1>
       </div>
 
-      <div className="product-grid">
-        {wishlist.map(({ product }) => (
-          <Link to={`/product/${product._id}`} key={product._id}>
-            <div className="product-container">
-              <div className="image-container">
-                <img src={product.searchImage} />
-                <span
-                  className="cart"
-                  onClick={(e) => callAddToCart(e, product._id)}
-                >
-                  <BsCart4 size={22} /> &nbsp; Move to cart
-                </span>
+      {loggedUser._id && wishlist.length == 0 ? (
+        <img src={emptyBox} className="emptyBox" />
+      ) : (
+        <div className="product-grid">
+          {wishlist.map(({ product }) => (
+            <Link to={`/product/${product._id}`} key={product._id}>
+              <div className="product-container">
+                <div className="image-container">
+                  <img src={product.searchImage} />
+                  <span
+                    className="cart"
+                    onClick={(e) => callAddToCart(e, product._id)}
+                  >
+                    <BsCart4 size={22} /> &nbsp; Move to cart
+                  </span>
 
-                <span
-                  className="wishlist"
-                  onClick={(e) => callToggleWishlist(e, product._id)}
-                >
-                  <IoHeartOutline size={22} /> &nbsp; Remove from wishlist
-                </span>
+                  <span
+                    className="wishlist"
+                    onClick={(e) => callToggleWishlist(e, product._id)}
+                  >
+                    <IoHeartOutline size={22} /> &nbsp; Remove from wishlist
+                  </span>
+                </div>
+                <p>{product.brand}</p>
+                <p>{product.product}</p>
+                <div>
+                  <TiStar />
+                  <TiStar />
+                  <TiStar />
+                  <TiStar />
+                  <TiStar />
+                </div>
+                <p className="price">Rs {product.price}</p>
               </div>
-              <p>{product.brand}</p>
-              <p>{product.product}</p>
-              <div>
-                <TiStar />
-                <TiStar />
-                <TiStar />
-                <TiStar />
-                <TiStar />
-              </div>
-              <p className="price">Rs {product.price}</p>
-            </div>
-          </Link>
-        ))}
-      </div>
+            </Link>
+          ))}
+        </div>
+      )}
     </section>
   );
 }

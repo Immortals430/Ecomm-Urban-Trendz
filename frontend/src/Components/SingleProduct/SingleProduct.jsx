@@ -17,7 +17,7 @@ import {
 } from "../../redux/reducers/user_reducer";
 import { authSelector } from "../../redux/reducers/auth_reducer";
 import { toast } from "react-toastify";
-
+import BlogItem from "../Loading/LoadingCards";
 
 export default function SingleProduct() {
   const { id } = useParams();
@@ -26,12 +26,14 @@ export default function SingleProduct() {
   const [itemQuantity, setItemQuantity] = useState(1);
   const { wishlist } = useSelector(userSelector);
   const { loggedUser } = useSelector(authSelector);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function callGetProduct() {
       const searchFilter = { id };
       const { payload } = await dispatch(getProduct(searchFilter));
-      dispatch(SET_SINGLEPRODUCT(payload.products[0]));
+      await dispatch(SET_SINGLEPRODUCT(payload.products[0]));
+      setLoading(false);
     }
     callGetProduct();
   }, []);
@@ -68,7 +70,11 @@ export default function SingleProduct() {
     <section className="singleproduct-sec">
       <div className="singleproduct-container">
         <div className="img-container">
-          <img src={singleProduct.searchImage} alt="" />
+          {loading ? (
+            <BlogItem />
+          ) : (
+            <img src={singleProduct.searchImage} alt="" />
+          )}
         </div>
         <div className="product-detail">
           <div className="product-name">

@@ -26,7 +26,7 @@ export default class AuthRepository {
     if (!tempUser) {
       throw new ApplicationError("confirmation link expired", 410);
     }
-    await User.create({
+    await Auth.create({
       username: tempUser.username,
       email: tempUser.email,
       password: tempUser.password,
